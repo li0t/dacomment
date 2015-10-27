@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-10-2015 05:55:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dacomment.PermisosPortafolio" table="PERMISOS_PORTAFOLIO" catalog="dacomment" optimistic-lock="version">
+        <composite-id name="id" class="dacomment.PermisosPortafolioId">
+            <key-property name="perId" type="int">
+                <column name="PER_ID" />
+            </key-property>
+            <key-property name="usuId" type="int">
+                <column name="USU_ID" />
+            </key-property>
+            <key-property name="proId" type="int">
+                <column name="PRO_ID" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

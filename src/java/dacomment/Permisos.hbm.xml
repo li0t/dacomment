@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-10-2015 05:55:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dacomment.Permisos" table="PERMISOS" catalog="dacomment" optimistic-lock="version">
+        <id name="perId" type="java.lang.Integer">
+            <column name="PER_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="perDescripcion" type="string">
+            <column name="PER_DESCRIPCION" length="50" />
+        </property>
+        <property name="perEstado" type="java.lang.Boolean">
+            <column name="PER__ESTADO" />
+        </property>
+    </class>
+</hibernate-mapping>

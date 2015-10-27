@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dacomment?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">pass</property>
+    <mapping resource="dacomment/Documentos.hbm.xml"/>
+    <mapping resource="dacomment/Usuario.hbm.xml"/>
+    <mapping resource="dacomment/Version.hbm.xml"/>
+    <mapping resource="dacomment/Permisos.hbm.xml"/>
+    <mapping resource="dacomment/PermisosDocumentos.hbm.xml"/>
+    <mapping resource="dacomment/Portafolios.hbm.xml"/>
+    <mapping resource="dacomment/PermisosPortafolio.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
