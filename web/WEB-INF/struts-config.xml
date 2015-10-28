@@ -7,6 +7,7 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="LoginForm" type="com.myapp.struts.LoginForm"/>
     
     </form-beans>
     
@@ -16,9 +17,11 @@
 
     <global-forwards>
         <forward name="welcome"  path="/Welcome.do"/>
+        <forward name="success"  path="/success.jsp"/>
     </global-forwards>
 
     <action-mappings>
+        <action name="LoginForm" path="/login" scope="request" type="com.myapp.struts.LoginAction" validate="false"/>
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>
     </action-mappings>
     
