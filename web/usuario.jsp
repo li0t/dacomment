@@ -10,10 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Error :(</title>
+        <title>yeah betches</title>
     </head>
     <body>
         <h1>Congratulations!</h1>
-        <p>You basically know nothing. 8===D </p>
+        <p>Your name is: <bean:write name="UsuarioForm" property="name" />.</p>
+        <p>Your email address is: <bean:write name="UsuarioForm" property="email" />.</p>
     </body>
 </html>
