@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-10-2015 05:55:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="dacomment" name="model.entities.Documentos" optimistic-lock="version" table="DOCUMENTOS">
+    <id name="docId" type="java.lang.Integer">
+      <column name="DOC_ID"/>
+      <generator class="identity"/>
+    </id>
+    <property name="proId" type="java.lang.Integer">
+      <column name="PRO_ID"/>
+    </property>
+    <property name="docNombre" type="string">
+      <column length="50" name="DOC_NOMBRE"/>
+    </property>
+    <property name="docFecha" type="timestamp">
+      <column length="19" name="DOC_FECHA" not-null="true"/>
+    </property>
+    <property name="docEstado" type="java.lang.Boolean">
+      <column name="DOC_ESTADO"/>
+    </property>
+    <property name="idUsuario" type="java.lang.Integer">
+      <column name="ID_USUARIO"/>
+    </property>
+  </class>
+</hibernate-mapping>

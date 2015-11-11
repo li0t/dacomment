@@ -1,4 +1,4 @@
-package dacomment;
+package model.entities;
 // Generated 27-10-2015 05:55:53 PM by Hibernate Tools 4.3.1
 
 

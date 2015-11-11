@@ -7,12 +7,12 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/dacomment?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">pass</property>
-    <mapping resource="dacomment/Documentos.hbm.xml"/>
-    <mapping resource="dacomment/Usuario.hbm.xml"/>
-    <mapping resource="dacomment/Version.hbm.xml"/>
-    <mapping resource="dacomment/Permisos.hbm.xml"/>
-    <mapping resource="dacomment/PermisosDocumentos.hbm.xml"/>
-    <mapping resource="dacomment/Portafolios.hbm.xml"/>
-    <mapping resource="dacomment/PermisosPortafolio.hbm.xml"/>
+    <mapping resource="model/Documentos.hbm.xml"/>
+    <mapping resource="model/Usuario.hbm.xml"/>
+    <mapping resource="model/Version.hbm.xml"/>
+    <mapping resource="model/Permisos.hbm.xml"/>
+    <mapping resource="model/PermisosDocumentos.hbm.xml"/>
+    <mapping resource="model/Portafolios.hbm.xml"/>
+    <mapping resource="model/PermisosPortafolio.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

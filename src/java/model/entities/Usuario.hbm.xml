@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-10-2015 05:55:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="dacomment" name="model.entities.Usuario" optimistic-lock="version" table="USUARIO">
+    <id name="usuId" type="java.lang.Integer">
+      <column name="USU_ID"/>
+      <generator class="identity"/>
+    </id>
+    <property name="usuRut" type="string">
+      <column length="10" name="USU_RUT"/>
+    </property>
+    <property name="usuDv" type="string">
+      <column length="1" name="USU_DV"/>
+    </property>
+    <property name="usuNombres" type="string">
+      <column length="50" name="USU_NOMBRES"/>
+    </property>
+    <property name="usuApellidoPaterno" type="string">
+      <column length="25" name="USU_APELLIDO_PATERNO"/>
+    </property>
+    <property name="usuApellidoMaterno" type="string">
+      <column length="25" name="USU_APELLIDO_MATERNO"/>
+    </property>
+    <property name="perEstado" type="java.lang.Boolean">
+      <column name="PER__ESTADO"/>
+    </property>
+    <property name="usuPassword" type="string">
+      <column length="50" name="USU_PASSWORD"/>
+    </property>
+  </class>
+</hibernate-mapping>
