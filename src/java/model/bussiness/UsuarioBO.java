@@ -24,10 +24,10 @@ public class UsuarioBO {
 
     }
 
-    public List<Usuario> getUsuario(String rut) {
+    public Usuario getUsuario(String rut) {
         Query query = session.createQuery("from Usuario where USU_ID = :rut ");
         query.setParameter("rut", rut);
-        return query.list();
+        return (Usuario) query.uniqueResult();
     }
 
 }

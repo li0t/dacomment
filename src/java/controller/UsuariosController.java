@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +24,10 @@ public class UsuariosController extends HttpServlet {
             throws ServletException, IOException {
         String rut = request.getParameter("rut");
         UsuarioBO userBO = new UsuarioBO();
-        List<Usuario> users = userBO.getUsuario(rut);
+        Usuario user = userBO.getUsuario(rut);
         HttpSession sesion = request.getSession(true);
         try {
-            sesion.setAttribute("usuario", users.get(0));
+            sesion.setAttribute("usuario", user);
             response.sendRedirect("infIngresoComuna.jsp");
         } catch (Exception e) {
             response.sendRedirect("error.jsp");
