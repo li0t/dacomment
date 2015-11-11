@@ -22,13 +22,14 @@ public class UsuariosController extends HttpServlet {
 
     protected void getUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String rut = request.getParameter("rut");
         UsuarioBO userBO = new UsuarioBO();
         Usuario user = userBO.getUsuario(rut);
         HttpSession sesion = request.getSession(true);
         try {
             sesion.setAttribute("usuario", user);
-            response.sendRedirect("infIngresoComuna.jsp");
+            response.sendRedirect("usuario.jsp");
         } catch (Exception e) {
             response.sendRedirect("error.jsp");
         }

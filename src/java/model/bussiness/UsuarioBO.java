@@ -5,11 +5,10 @@
  */
 package model.bussiness;
 
-import java.util.List;
 import model.entities.Usuario;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -21,12 +20,14 @@ public class UsuarioBO {
 
     public UsuarioBO() {
         session = NewHibernateUtil.getSessionFactory().openSession();
-
     }
 
     public Usuario getUsuario(String rut) {
-        Query query = session.createQuery("from Usuario where USU_ID = :rut ");
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Usuario where USU_ID = :rut");
         query.setParameter("rut", rut);
+        tx.commit();
+        session.close();
         return (Usuario) query.uniqueResult();
     }
 
