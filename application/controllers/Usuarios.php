@@ -8,29 +8,13 @@ class Usuarios extends CI_Controller {
 	  parent::__construct();
 	  $this->layout->setLayout('template'); // carga el template para todos las vistas
 	  $this->load->model('usuario_model'); // Indica que todos los metodos pueden llamar a este modelo
-	  
+    $this->layout->setTitle('Dacomment:Usuarios'); // edita el título por defecto
 	}
 
 	public function index()
 	{
-	  $this->layout->view('index');
+    $usuarios = $this->usuario_model->getTodosUsuarios();
+	  $this->layout->view('index',compact("usuarios"));;
 	}
-	
-	public function listar_usuarios()
-	{
-	  $usuarios = $this->usuario_model->getTodosUsuarios();
-	  $this->layout->view('listar_usuarios',compact("usuarios"));
-	}
-	
-	public function editar_usuario()
-	{
-	  $usuarios = $this->usuario_model->getTodosUsuarios();
-	  $this->layout->view('editar_usuario',compact("usuarios"));
-	}
-	
-	public function eliminar_usuario()
-	{
-	  $usuarios = $this->usuario_model->getTodosUsuarios();
-	  $this->layout->view('eliminar_usuario',compact("usuarios"));
-	}
+
 }

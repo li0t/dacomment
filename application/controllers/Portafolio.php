@@ -8,7 +8,7 @@ class Portafolio extends CI_Controller {
 	  parent::__construct();
 	  $this->layout->setLayout('template'); // carga el template para todos las vistas
 	  $this->load->model('portafolio_model'); // Indica que todos los metodos pueden llamar a este modelo
-	  
+    $this->layout->setTitle('Dacomment:Portafolio'); // edita el título por defecto
 	}
 
 	public function index()
@@ -16,7 +16,7 @@ class Portafolio extends CI_Controller {
 	  $portafolios = $this->portafolio_model->obtenerPortafolios();
 	  $this->layout->view('index',compact("portafolios"));
 	}
-	
+
 	public function crear_portafolio()
 	{
 		$this->layout->view('crear_portafolio');
@@ -35,25 +35,25 @@ class Portafolio extends CI_Controller {
 					$this->session->set_flashdata("ControllerMessage","Error creando el portafolio");
 					redirect(base_url()."portafolio/crear_portafolio",301);
 				}
-				
 
-				
+
+
 		}
-		
+
 	}
-	
+
 	public function editar_portafolio($id=null)
 	{
 	  if (!$id) {
 	  	show_404();
-	  }	
+	  }
 	  $datos = $this->portafolio_model->obtenerPortafolioPorId($id);
 	  if(sizeof($datos)==0){
 	  	show_404();
 	  }
 	  		$this->layout->view('editar_portafolio',compact('id','datos'));
 
-	  		if ($this->input->post()) 
+	  		if ($this->input->post())
 	  		{
 	  		// Genera el array con los datos a insertar en la base
 			$data = array("PRO_NOMBRE"=>$this->input->post("nomportafolio",true));
@@ -68,10 +68,10 @@ class Portafolio extends CI_Controller {
 					$this->session->set_flashdata("ControllerMessage","Error actualizando el portafolio");
 					redirect(base_url()."portafolio/editar_portafolio/".$id,301);
 				}
-				
+
 	  		}
 	}
-	
+
 	public function eliminar_portafolio($id=null)
 	{
 		if (!$id) {

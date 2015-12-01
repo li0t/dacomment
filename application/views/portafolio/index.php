@@ -1,12 +1,10 @@
-
-	<h1>Gestion de Portafolios</h1>
-	<p>Portafolio</p>
+<h1>Gestion de Portafolios</h1>
 
 <?php
 	if ($this->session->flashdata('ControllerMessage')!='') {
 ?>
 	<p style="color:red;"><?php echo $this->session->flashdata('ControllerMessage'); ?></p>
-<?php	
+<?php
 	}
 ?>
 
@@ -32,7 +30,7 @@
 				<a href="<?php echo base_url()?>portafolio/eliminar_portafolio/<?php echo $por->PRO_ID ?>">Eliminar</a>
 			</td>
 		</tr>
-	<?php		
+	<?php
 		}
 	?>
 </table>

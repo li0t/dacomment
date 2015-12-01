@@ -7,14 +7,15 @@ class Welcome extends CI_Controller {
     {
         parent::__construct();
         $this->layout->setLayout('template');
+				$this->layout->setTitle('Dacomment'); // edita el título por defecto
     }
-    
+
 	public function index()
 	{
 		//Llama a la view index del controlador Welcome
         $this->layout->view('index');
 	}
-	
+
     	public function nosotros()
 	{
 		//$this->load->view('welcome_message');

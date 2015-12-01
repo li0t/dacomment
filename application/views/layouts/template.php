@@ -4,23 +4,35 @@
 
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title><?php echo $this->layout->getTitle(); ?></title>
-		<meta name="description" content="<?php echo $this->layout->getDescripcion(); ?>">
-		<meta name="keywords" content="<?php echo $this->layout->getKeywords(); ?>" />
-        <!--*************auxiliares*****************-->
+  <title>
+    <?php echo $this->layout->getTitle(); ?>
+  </title>
+  <link href="<?php echo base_url()?>../public/css/template.css" rel='stylesheet' type='text/css' media='all' />
+  <meta name="description" content="<?php echo $this->layout->getDescripcion(); ?>">
+  <meta name="keywords" content="<?php echo $this->layout->getKeywords(); ?>" />
+  <!--*************auxiliares*****************-->
 
-<?php echo $this->layout->css; ?> 
+  <?php echo $this->layout->css; ?>
 
-<?php echo $this->layout->js; ?> 
+    <?php echo $this->layout->js; ?>
 
-<!--**********fin auxiliares*****************-->
+      <!--**********fin auxiliares*****************-->
 </head>
 
 <body>
+  <div id="navbar">
+    <ul>
+      <li><a href="<?php echo base_url()?>">DACOMMENT</a></li>
+      <li><a href="<?php echo base_url()?>usuarios">USUARIOS</a></li>
+      <li><a href="<?php echo base_url()?>portafolio">PORTAFOLIO</a></li>
+    </ul>
+  </div>
 
-<?php echo $content_for_layout; ?>
-
+  <div id="content">
+    <?php echo $content_for_layout; ?>
+  </div>
 </body>
+
 </html>

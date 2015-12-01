@@ -31,9 +31,9 @@ class Layout
 /**
 	 * Variables para mejorar el SEO del sitio
 	 * @var sting
-	 */	
-	public $title       = 'Title por defecto';	
-	public $keywords    = 'palabras clave';	
+	 */
+	public $title       = 'Title por defecto';
+	public $keywords    = 'palabras clave';
 	public $descripcion = 'descripción seo por defecto';
 
 	/**
@@ -113,7 +113,7 @@ public function setTitle($title)
 	public function getTitle()
 	{
 		return $this->title;
-	}	
+	}
 	public function getKeywords()
 	{
 		return $this->keywords;
@@ -143,6 +143,6 @@ public function setTitle($title)
 	public function css($archivos = array())
 	{
 		foreach ( $archivos as $archivo )
-			$this->css .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"{$archivo}\" />\n";
+			$this->css .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"../public/css/{$archivo}.css\" />\n";
 	}
 }

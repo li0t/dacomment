@@ -6,7 +6,7 @@
 	if ($this->session->flashdata('ControllerMessage')!='') {
 ?>
 	<p style="color:red;"><?php echo $this->session->flashdata('ControllerMessage'); ?></p>
-<?php	
+<?php
 	}
 ?>
 
@@ -17,7 +17,7 @@ echo form_open_multipart(null,$atributos);
 <p>Nombre</p><input type="text" id="nomportafolio" name="nomportafolio" value="<?php echo $datos->PRO_NOMBRE ?>"/>
 <hr>
 <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
-<input type="submit" value="Crear Portafolio"/>
+<input type="submit" value="Editar Portafolio"/>
 <?php
 echo form_close();
 ?>
