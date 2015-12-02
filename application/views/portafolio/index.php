@@ -15,6 +15,7 @@
 	<tr>
 		<th>ID</th>
 		<th>NOMBRE</th>
+		<th>USUARIO</th>
 		<th>FECHA</th>
 		<th>ACCION</th>
 	</tr>
@@ -24,6 +25,7 @@
 		<tr>
 			<td><?php echo $por->PRO_ID ?></td>
 			<td><?php echo $por->PRO_NOMBRE ?></td>
+			<td><?php echo $por->USU_ID ?></td>
 			<td><?php echo $por->PRO_FECHA ?></td>
 			<td>
 				<a href="<?php echo base_url()?>portafolio/editar_portafolio/<?php echo $por->PRO_ID ?>">Editar</a>

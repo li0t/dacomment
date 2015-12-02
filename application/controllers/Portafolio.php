@@ -19,11 +19,16 @@ class Portafolio extends CI_Controller {
 
 	public function crear_portafolio()
 	{
+    $usuario = $this->session->userdata('usuario');
+    if (!$usuario) {
+      $this->session->set_flashdata("ControllerMessage","Inicia sesión para crear un portafolio!");
+      redirect(base_url()."portafolio",301);
+	  }
 		$this->layout->view('crear_portafolio');
 		// Pregunta si esta insertando datos por post desde un formulario
 		if ($this->input->post()) {
 			// Genera el array con los datos a insertar en la base
-			$data = array("PRO_NOMBRE"=>$this->input->post("nomportafolio",true));
+			$data = array("PRO_NOMBRE"=>$this->input->post("nomportafolio",true),"USU_ID"=>$usuario->USU_ID);
 			// Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
 			$insertar = $this->portafolio_model->insertarPortafolio($data);
 				if ($insertar) {
