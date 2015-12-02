@@ -27,11 +27,12 @@ class Usuario_model extends CI_Model {
         return $query->row();
     }
 
+    /* Busca usuario por rut y password */
     public function autenticarUsuario($datos=array())
     {
       $where=$datos;
       $query=$this->db
-      ->select("USU_ID,USU_RUT,USU_DV,USU_NOMBRES,USU_APELLIDO_PATERNO,USU_APELLIDO_MATERNO")
+      ->select("USU_ID")
       ->from("USUARIO")
       ->where($where)
       ->get();

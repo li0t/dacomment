@@ -40,6 +40,9 @@ class Usuarios extends CI_Controller {
       // Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
       $autenticado = $this->usuario_model->autenticarUsuario($data);
         if ($autenticado) {
+
+          $this->session->set_userdata("usuario", $autenticado);
+
           // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
           $this->session->set_flashdata("ControllerMessage","Te has logeado con éxito!");
           redirect(base_url(),301);
@@ -50,5 +53,11 @@ class Usuarios extends CI_Controller {
         }
     }
 
+  }
+
+  public function cerrar_sesion($id=null)
+  {
+      $this->session->sess_destroy();
+      redirect(base_url(),301);
   }
 }

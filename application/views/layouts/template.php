@@ -27,7 +27,17 @@
       <li><a href="<?php echo base_url()?>">DACOMMENT</a></li>
       <li><a href="<?php echo base_url()?>usuarios">USUARIOS</a></li>
       <li><a href="<?php echo base_url()?>portafolio">PORTAFOLIO</a></li>
+      <?php
+      	if ($this->session->userdata('usuario')) {
+      ?>
+      <li><a href="<?php echo base_url()?>usuarios/cerrar_sesion">CERRAR SESIÓN</a></li>
+      <?php
+      } else  {
+      ?>
       <li><a href="<?php echo base_url()?>usuarios/autenticar_usuario">INICIAR SESIÓN</a></li>
+      <?php
+      	}
+      ?>
     </ul>
   </div>
 
