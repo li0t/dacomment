@@ -1,14 +1,8 @@
-<ul>
-<?php 	foreach($usuarios as $usu){ ?>
-	    <li>
-	      Nombre: 
-		<?php echo $usu->USU_NOMBRES ?> <br>
-	      Apellidos: 
-		<?php echo $usu->USU_APELLIDO_PATERNO ?> <br>
-	      Rut: 
-		<?php echo $usu->USU_RUT ?>
-	    </li>
-<?php
-	}
-?>
-</ul>
+<h1>Detalle de Usuario</h1>
+
+    Nombre:
+<?php echo $usuario->USU_NOMBRES ?> <br>
+    Apellidos:
+<?php echo $usuario->USU_APELLIDO_PATERNO ?> <br>
+    Rut:
+<?php echo $usuario->USU_RUT ?>
