@@ -35,9 +35,6 @@ class Portafolio extends CI_Controller {
 					$this->session->set_flashdata("ControllerMessage","Error creando el portafolio");
 					redirect(base_url()."portafolio/crear_portafolio",301);
 				}
-
-
-
 		}
 
 	}

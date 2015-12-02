@@ -20,7 +20,7 @@
 		foreach ($usuarios as $usu) {
 	?>
 		<tr>
-			<td><?php echo $usu->USU_ID ?></td>
+			<td><a href="<?php echo base_url()?>usuarios/obtener_usuario/<?php echo $usu->USU_ID ?>"><?php echo $usu->USU_ID?></a></td>
       <td><?php echo $usu->USU_RUT ?></td>
 			<td><?php echo $usu->USU_NOMBRES ?></td>
 			<td><?php echo $usu->USU_APELLIDO_PATERNO ?></td>
