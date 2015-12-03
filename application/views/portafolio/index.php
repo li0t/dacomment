@@ -23,7 +23,7 @@
 		foreach ($portafolios as $por) {
 	?>
 		<tr>
-			<td><?php echo $por->PRO_ID ?></td>
+			<td><a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $por->PRO_ID ?>"><?php echo $por->PRO_ID ?></a></td>
 			<td><?php echo $por->PRO_NOMBRE ?></td>
 			<td><?php echo $por->USU_ID ?></td>
 			<td><?php echo $por->PRO_FECHA ?></td>

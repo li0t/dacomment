@@ -26,7 +26,7 @@
     <ul>
       <li><a href="<?php echo base_url()?>">DACOMMENT</a></li>
       <li><a href="<?php echo base_url()?>usuarios">USUARIOS</a></li>
-      <li><a href="<?php echo base_url()?>portafolio">PORTAFOLIO</a></li>
+      <li><a href="<?php echo base_url()?>portafolio">PORTAFOLIOS</a></li>
       <?php
       	if ($this->session->userdata('usuario')) {
       ?>

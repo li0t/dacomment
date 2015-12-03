@@ -18,6 +18,18 @@ class Portafolio_model extends CI_Model {
         return $query->result();
     }
 
+    public function obtenerMisPortafolios($datos=array())
+    {
+        $where=$datos;
+        $query=$this->db
+        ->select("PRO_ID,USU_ID,PRO_NOMBRE,PRO_FECHA")
+        ->from("PORTAFOLIO")
+        ->where($where)
+        ->order_by("PRO_ID","asc")
+        ->get();
+        return $query->result();
+    }
+
     public function obtenerPortafolioPorId($id)
     {
         $where=array("PRO_ID"=>$id);
@@ -27,6 +39,28 @@ class Portafolio_model extends CI_Model {
         ->where($where)
         ->get();
         return $query->row();
+    }
+
+    public function obtenerPermisosPortafolio($id)
+    {
+        $where=array("PRO_ID"=>$id);
+        $query=$this->db
+        ->select("PRO_ID,USU_ID,PER_ID")
+        ->from("PERMISOS_PROYECTO")
+        ->where($where)
+        ->get();
+        return $query->result();
+    }
+
+    public function obtenerDocumentosPortafolio($id)
+    {
+        $where=array("PRO_ID"=>$id);
+        $query=$this->db
+        ->select("DOC_ID,PRO_ID,DOC_NOMBRE,DOC_FECHA,DOC_ESTADO,ID_USUARIO")
+        ->from("DOCUMENTOS")
+        ->where($where)
+        ->get();
+        return $query->result();
     }
 
     public function insertarPortafolio($datos=array())
@@ -42,4 +76,4 @@ class Portafolio_model extends CI_Model {
         return true;
     }
 
-} 
+}
