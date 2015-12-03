@@ -69,6 +69,12 @@ class Portafolio_model extends CI_Model {
         return true;
     }
 
+    public function entregarPermisosPortafolio($datos=array())
+    {
+        $query=$this->db->insert("PERMISOS_PROYECTO",$datos); /* Falta validación */
+        return true;
+    }
+
     public function modificarPortafolio($datos=array(),$id)
     {
         $this->db->where('PRO_ID',$id);

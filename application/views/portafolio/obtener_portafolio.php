@@ -1,5 +1,13 @@
 <h1>Detalle de Portafolio</h1>
 
+<?php
+	if ($this->session->flashdata('ControllerMessage')!='') {
+?>
+	<p style="color:red;"><?php echo $this->session->flashdata('ControllerMessage'); ?></p>
+<?php
+	}
+?>
+
 <h4>Nombre:</h4>
 <?php echo $portafolio->PRO_NOMBRE ?> <br>
 
@@ -23,3 +31,5 @@
 		}
 	?>
 </table>
+
+<h4><a href="<?php echo base_url()?>portafolio/entregar_nuevo_permiso/<?php echo $portafolio->PRO_ID ?>">Entregar Permisos</a> </h4>

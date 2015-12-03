@@ -8,6 +8,7 @@ class Portafolio extends CI_Controller {
 	  parent::__construct();
 	  $this->layout->setLayout('template'); // carga el template para todos las vistas
 	  $this->load->model('portafolio_model'); // Indica que todos los metodos pueden llamar a este modelo
+    $this->load->model('permiso_model'); // Indica que todos los metodos pueden llamar a este modelo
     $this->layout->setTitle('Dacomment:Portafolio'); // edita el título por defecto
 	}
 
@@ -111,4 +112,32 @@ class Portafolio extends CI_Controller {
 				}
 
 	}
+
+  public function entregar_nuevo_permiso($id=null)
+  {
+    $usuario = $this->session->userdata('usuario');
+    if (!$usuario) {
+      $this->session->set_flashdata("ControllerMessage","Inicia agregar permisos a un portafolio!");
+      redirect(base_url()."portafolio",301);
+    }
+    $permisos = $this->permiso_model->obtenerPermisos();
+    $this->layout->view('entregar_nuevo_permiso',compact('id','permisos'));
+    // Pregunta si esta insertando datos por post desde un formulario
+    if ($this->input->post()) {
+      // Genera el array con los datos a insertar en la base
+      $data = array("USU_ID"=>$this->input->post("usuarioid",true),"PER_ID"=>$this->input->post("permisoid",true),"PRO_ID"=>$id); 
+      // Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
+      $insertar = $this->portafolio_model->entregarPermisosPortafolio($data);
+        if ($insertar) {
+          // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
+          $this->session->set_flashdata("ControllerMessage","Se han otorgado permisos para el portafolio!");
+          redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
+        } else {
+          // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
+          $this->session->set_flashdata("ControllerMessage","Error otorgando permisos al portafolio!");
+          redirect(base_url()."portafolio/nuevo_permiso_portafolio/".$id,301);
+        }
+    }
+
+  }
 }
