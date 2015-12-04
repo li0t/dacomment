@@ -1,5 +1,5 @@
 
-	<h1>Entregar Permisos Portafolio</h1>
+	<h1>Editar Permisos  Portafolio</h1>
 	<a href="<?php echo base_url()?>portafolio">Volver</a>
 
 <?php
@@ -11,10 +11,10 @@
 ?>
 
 <?php
-$atributos = array('id'=>'nuevopermiso','name'=>'nuevopermiso');
+$atributos = array('id'=>'editarpermiso','name'=>'editarpermiso');
 echo form_open_multipart(null,$atributos);
 ?>
-<p>Nombre</p><input type="text" id="usuarioid" name="usuarioid" placeholder="Ingresa el ID del usuario a agregar!"/>  <!-- Esto debería recibir un nombre -->
+<p>Nombre</p><input type="text" id="usuarioid" name="usuarioid" value="<?php echo $usuario ?>" readonly/>
 <br>
 <select id="permisoid" name="permisoid">
 	<?php
@@ -27,7 +27,7 @@ echo form_open_multipart(null,$atributos);
 </select>
 <input type="hidden" id="id" name="id" value="<?php echo $id ?>">
 <br>
-<input type="submit" value="Agregar Permiso"/>
+<input type="submit" value="Editar Permiso"/>
 <?php
 echo form_close();
 ?>

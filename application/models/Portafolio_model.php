@@ -75,6 +75,13 @@ class Portafolio_model extends CI_Model {
         return true;
     }
 
+    public function editarPermisosPortafolio($datos=array())
+    {
+      $this->db->where('PRO_ID', $datos["PRO_ID"], 'USU_ID', $datos["USU_ID"]);
+      $this->db->update('PERMISOS_PROYECTO',$datos);
+      return true;
+    }
+
     public function modificarPortafolio($datos=array(),$id)
     {
         $this->db->where('PRO_ID',$id);
