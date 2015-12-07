@@ -145,33 +145,50 @@ class Portafolio extends CI_Controller {
   }
 
 
-    public function editar_permiso_usuario($id=null, $usuario=null)
-    {
-      if (!$id || !$usuario) {
-        show_404();
-      }
-      if (!$this->session->userdata('usuario')) {
-        $this->session->set_flashdata("ControllerMessage","Inicia agregar permisos a un portafolio!");
-        redirect(base_url()."portafolio",301);
-      }
-      $permisos = $this->permiso_model->obtenerPermisos();
-      $this->layout->view('editar_permiso_usuario',compact('id','usuario','permisos'));
-      // Pregunta si esta insertando datos por post desde un formulario
-      if ($this->input->post()) {
-        // Genera el array con los datos a insertar en la base
-        $data = array("PRO_ID"=>$id, "USU_ID"=>$usuario,"PER_ID"=>$this->input->post("permisoid",true));
-        // Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
-        $actualizar = $this->portafolio_model->editarPermisosPortafolio($data);
-          if ($actualizar) {
-            // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
-            $this->session->set_flashdata("ControllerMessage","Se han modificado los permisos del portafolio!");
-            redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
-          } else {
-            // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
-            $this->session->set_flashdata("ControllerMessage","Error modificando los permisos al portafolio!");
-            redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
-          }
-      }
-
+  public function editar_permiso_usuario($id=null, $usuario=null)
+  {
+    if (!$id || !$usuario) {
+      show_404();
+    }
+    if (!$this->session->userdata('usuario')) {
+      $this->session->set_flashdata("ControllerMessage","Inicia agregar permisos a un portafolio!");
+      redirect(base_url()."portafolio",301);
+    }
+    $permisos = $this->permiso_model->obtenerPermisos();
+    $this->layout->view('editar_permiso_usuario',compact('id','usuario','permisos'));
+    // Pregunta si esta insertando datos por post desde un formulario
+    if ($this->input->post()) {
+      // Genera el array con los datos a insertar en la base
+      $data = array("PRO_ID"=>$id, "USU_ID"=>$usuario,"PER_ID"=>$this->input->post("permisoid",true));
+      // Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
+      $actualizar = $this->portafolio_model->editarPermisosPortafolio($data);
+        if ($actualizar) {
+          // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
+          $this->session->set_flashdata("ControllerMessage","Se han modificado los permisos del portafolio!");
+          redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
+        } else {
+          // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
+          $this->session->set_flashdata("ControllerMessage","Error modificando los permisos al portafolio!");
+          redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
+        }
+    }
   }
+
+  public function eliminar_permiso_usuario($id=null, $usuario=null)
+	{
+		if (!$id || !$usuario) {
+	  		show_404();
+	  	}
+	  	$elimina = $this->portafolio_model->eliminarPermisoUsuario($id, $usuario);
+	  	if ($elimina) {
+					// Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
+					$this->session->set_flashdata("ControllerMessage","Se ha removido el permiso del portafolio!");
+					redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
+				} else {
+					// Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
+					$this->session->set_flashdata("ControllerMessage","Error removiendo el permiso del portafolio!");
+					redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
+				}
+
+	}
 }

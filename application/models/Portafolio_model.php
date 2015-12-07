@@ -77,7 +77,8 @@ class Portafolio_model extends CI_Model {
 
     public function editarPermisosPortafolio($datos=array())
     {
-      $this->db->where('PRO_ID', $datos["PRO_ID"], 'USU_ID', $datos["USU_ID"]);
+      $this->db->where('PRO_ID', $datos["PRO_ID"]);
+      $this->db->where('USU_ID', $datos["USU_ID"]); // Multiples invocaciones de where genera una clausula AND
       $this->db->update('PERMISOS_PROYECTO',$datos);
       return true;
     }
@@ -86,6 +87,14 @@ class Portafolio_model extends CI_Model {
     {
         $this->db->where('PRO_ID',$id);
         $this->db->update('PORTAFOLIO',$datos);
+        return true;
+    }
+
+    public function eliminarPermisoUsuario($id, $usuario)
+    {
+        $this->db->where('PRO_ID', $id);
+        $this->db->where('USU_ID', $usuario);
+        $this->db->delete('PERMISOS_PROYECTO');
         return true;
     }
 
