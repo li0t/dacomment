@@ -10,6 +10,8 @@
 
 <h4>Nombre:</h4>
 <?php echo $portafolio->PRO_NOMBRE ?> <br>
+<br>
+<a href="<?php echo base_url()?>portafolio/subir_documento/<?php echo $portafolio->PRO_ID ?>">Nuevo Documento</a>
 
 <h4>Documentos:</h4>
 
@@ -23,7 +25,7 @@
 		foreach ($documentos as $doc) {
 	?>
 		<tr>
-			<td><a href="<?php echo base_url()?>documentos/<?php echo $doc->DOC_ID ?>"><?php echo $doc->DOC_ID ?></a> ?></td>
+			<td><a href="<?php echo base_url()?>documentos/<?php echo $doc->DOC_ID ?>"><?php echo $doc->DOC_ID ?></a></td>
 			<td><?php echo $doc->DOC_NOMBRE ?></td>
 			<td><?php echo $doc->ID_USUARIO ?></td>
 		</tr>
