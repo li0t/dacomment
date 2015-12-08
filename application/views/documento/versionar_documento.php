@@ -1,4 +1,4 @@
-<h1>Subir Nuevo Documento</h1>
+<h1>Subir Nueva Versión Documento</h1>
 
 <?php
 	if ($this->session->flashdata('ControllerMessage')!='') {
@@ -13,9 +13,11 @@
 <?php echo form_open_multipart('documento/do_upload');?>
 
 <input type="file" name="userfile" size="20" required/><br />
-<input name="nombreDocumento" placeholder="Nombra tu documento..." required/><br />
-<input size="50" name="descripcionDocumento" placeholder="Comentarios del Documento" required/><br />
-<input type="hidden" name="id_port" value="<?php echo $id_port?>"/>
+<input name="nombreDocumento" value="<?php echo $doc->DOC_NOMBRE ?>" readonly/><br />
+<input size="50" name="descripcionDocumento" placeholder="Comenta los cambios en la versión" required/><br />
+
+<input type="hidden" name="id_port" value="<?php echo $id_port ?>"/>
+<input type="hidden" name="id_doc" value="<?php echo $doc->DOC_ID ?>"/>
 <br />
 <br />
 

@@ -36,6 +36,17 @@ class Documento_model extends CI_Model {
         return $query->row();
     }
 
+    public function obtenerDocumento($datos=array())
+    {
+        $where=$datos;
+        $query=$this->db
+        ->select("DOC_ID,PRO_ID,DOC_NOMBRE,DOC_FECHA,DOC_ESTADO,ID_USUARIO,DOC_DESCRIPCION")
+        ->from("DOCUMENTOS")
+        ->where($where)
+        ->get();
+        return $query->row();
+    }
+
 
 
 }

@@ -3,7 +3,7 @@
 
 <a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $id_port ?>">Volver</a>
 <br><br>
-<a href="<?php echo base_url()?>documento/subir_documento/<?php echo $id_port ?>/<?php echo $id_doc ?>">Nueva Version</a>
+<a href="<?php echo base_url()?>documento/versionar_documento/<?php echo $id_port ?>/<?php echo $id_doc ?>">Nueva Version</a>
 <br>
 
 <table border="1">
@@ -16,8 +16,8 @@
 	</tr>
 <?php
 $enumerador =1;
-foreach ($versiones as $ver) 
-{	
+foreach ($versiones as $ver)
+{
 ?>
 	<tr>
 		<td align="center"><?php echo $enumerador ?></td>
