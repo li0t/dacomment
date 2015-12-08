@@ -23,8 +23,15 @@ class Version_model extends CI_Model {
         return $query->result();
     }
 
-    
-
-
-
+    public function obtenerUltimaVersion($id_doc)
+    {
+        $where=array("DOC_ID"=>$id_doc);        
+        $query=$this->db
+        ->select_max('VER_NUMERO')
+        ->from("VERSION")
+        ->where($where)
+        ->get();
+        return $query->row();
+        // Produce: SELECT MAX(VER_NUMERO) as VER_NUMERO FROM VERSION
+    }
 }

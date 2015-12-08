@@ -34,7 +34,7 @@
 			<td><?php echo $doc->ID_USUARIO ?></td>
 			<td><?php echo $doc->DOC_DESCRIPCION ?></td>
 			<td colspan = 3 >
-				<a href="<?php echo base_url()?>documento/historia_documento/<?php echo $doc->DOC_ID ?>">VER</a>
+				<a href="<?php echo base_url()?>documento/historia_documento/<?php echo $doc->DOC_ID ?>/<?php echo $portafolio->PRO_ID ?>">VER</a>
 			</td>
 		</tr>
 	<?php

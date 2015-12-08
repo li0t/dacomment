@@ -23,14 +23,14 @@ class Documento extends CI_Controller {
 	  $this->layout->view('index',compact("portafolios"));
 	}
 
-  public function subir_documento($id=null)
+  public function subir_documento($id_port=null,$id_doc=null)
   {
-    if (!$id) {
+    if (!$id_port) {
         show_404();
       }
 
-    $this->session->set_userdata("documento", $id);
-    $this->layout->view('subir_documento', compact('id'));
+    $this->session->set_userdata("documento", $id_port);
+    $this->layout->view('subir_documento', compact('id_port','id_doc'));
 
   }
 
@@ -42,6 +42,7 @@ class Documento extends CI_Controller {
     $usuario = $this->session->userdata('usuario');
     $nombreDocumento = $this->input->post("nombreDocumento",true);
     $descripcionDocumento = $this->input->post("descripcionDocumento",true);
+    $id_doc = $this->input->post("id_doc",true);
 
     if (!$id || !$nombreDocumento || !$usuario) 
     {
@@ -60,14 +61,25 @@ class Documento extends CI_Controller {
       $this->load->library('upload', $config);
     if ($this->upload->do_upload()) 
     {
-       $data = array("PRO_ID"=>$id,"DOC_NOMBRE"=>$nombreDocumento, "DOC_FECHA"=>date("Y-m-d H:i:s"), "DOC_ESTADO"=>1, "ID_USUARIO"=>$usuario->USU_ID, "DOC_DESCRIPCION"=>$descripcionDocumento);
-       $this->documento_model->insertarDocumento($data);
+      if($id_doc=="")
+      {
+         $data = array("PRO_ID"=>$id,"DOC_NOMBRE"=>$nombreDocumento, "DOC_FECHA"=>date("Y-m-d H:i:s"), "DOC_ESTADO"=>1, "ID_USUARIO"=>$usuario->USU_ID, "DOC_DESCRIPCION"=>$descripcionDocumento);
+         $this->documento_model->insertarDocumento($data);
 
-       $id_doc = $this->documento_model->obtenerIdDocumento($data);
-       $dataversion = array("DOC_ID"=>$id_doc->DOC_ID,"VER_NUMERO"=>"1", "VER_FECHA"=>date("Y-m-d H:i:s"),"ID_USUARIO"=>$usuario->USU_ID, "VER_COMENTARIO"=>$descripcionDocumento);
-       $this->version_model->insertarVersion($dataversion);
-       $this->session->set_flashdata("ControllerMessage","Se ha subido un nuevo documento!");
-          redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
+         $id_doc = $this->documento_model->obtenerIdDocumento($data);
+         $dataversion = array("DOC_ID"=>$id_doc->DOC_ID,"VER_NUMERO"=>"1", "VER_FECHA"=>date("Y-m-d H:i:s"),"ID_USUARIO"=>$usuario->USU_ID, "VER_COMENTARIO"=>$descripcionDocumento);
+         $this->version_model->insertarVersion($dataversion);
+         $this->session->set_flashdata("ControllerMessage","Se ha subido un nuevo documento!");
+            redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
+      }else{
+         $ult_version = $this->version_model->obtenerUltimaVersion($id_doc);
+         $version = $ult_version->VER_NUMERO+1;
+         $dataversion = array("DOC_ID"=>$id_doc,"VER_NUMERO"=>$version, "VER_FECHA"=>date("Y-m-d H:i:s"),"ID_USUARIO"=>$usuario->USU_ID, "VER_COMENTARIO"=>$descripcionDocumento);
+         $this->version_model->insertarVersion($dataversion);
+         $this->session->set_flashdata("ControllerMessage","Se ha Actualizado una nueva Version!");
+            redirect(base_url()."portafolio/obtener_portafolio/".$id."/".$id_doc,301);
+      }
+
     } else {
       $this->session->set_flashdata("ControllerMessage","Ha habido un error subiendo el nuevo documento! ".$this->upload->display_errors());
           redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
@@ -86,15 +98,15 @@ class Documento extends CI_Controller {
 
   }
 
-  public function historia_documento($id=null)
+  public function historia_documento($id_doc=null,$id_port=null)
   {
-    if (!$id) {
+    if (!$id_doc || !$id_port) {
         show_404();
       }
 
-    $this->session->set_userdata("documento", $id);
-    $versiones = $this->version_model->obtenerVersiones($id);
-    $this->layout->view('ver_documento', compact('id','versiones'));
+    // $this->session->set_userdata("documento", $id);
+    $versiones = $this->version_model->obtenerVersiones($id_doc);
+    $this->layout->view('ver_documento', compact('id_doc','id_port','versiones'));
 
   }  
 

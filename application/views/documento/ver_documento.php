@@ -1,8 +1,10 @@
 <h1>Hitoria Documentos</h1>
 
 
-<a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $id ?>">Volver</a>
-
+<a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $id_port ?>">Volver</a>
+<br><br>
+<a href="<?php echo base_url()?>documento/subir_documento/<?php echo $id_port ?>/<?php echo $id_doc ?>">Nueva Version</a>
+<br>
 
 <table border="1">
 	<tr>
