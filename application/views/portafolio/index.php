@@ -13,17 +13,18 @@
 
 <table border="1">
 	<tr>
-		<th>ID</th>
+		<th>#</th>
 		<th>NOMBRE</th>
 		<th>USUARIO</th>
 		<th>FECHA</th>
 		<th>ACCION</th>
 	</tr>
 	<?php
+	$enumerar = 1;
 		foreach ($portafolios as $por) {
 	?>
 		<tr>
-			<td><a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $por->PRO_ID ?>"><?php echo $por->PRO_ID ?></a></td>
+			<td align="center"><a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $por->PRO_ID ?>"><?php echo $enumerar ?></a></td>
 			<td><?php echo $por->PRO_NOMBRE ?></td>
 			<td><?php echo $por->USU_ID ?></td>
 			<td><?php echo $por->PRO_FECHA ?></td>
@@ -33,6 +34,7 @@
 			</td>
 		</tr>
 	<?php
+		$enumerar ++;
 		}
 	?>
 </table>

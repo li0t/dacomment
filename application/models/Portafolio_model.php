@@ -52,17 +52,6 @@ class Portafolio_model extends CI_Model {
         return $query->result();
     }
 
-    public function obtenerDocumentosPortafolio($id)
-    {
-        $where=array("PRO_ID"=>$id);
-        $query=$this->db
-        ->select("DOC_ID,PRO_ID,DOC_NOMBRE,DOC_FECHA,DOC_ESTADO,ID_USUARIO")
-        ->from("DOCUMENTOS")
-        ->where($where)
-        ->get();
-        return $query->result();
-    }
-
     public function insertarPortafolio($datos=array())
     {
         $query=$this->db->insert("PORTAFOLIO",$datos);

@@ -11,25 +11,34 @@
 <h4>Nombre:</h4>
 <?php echo $portafolio->PRO_NOMBRE ?> <br>
 <br>
-<a href="<?php echo base_url()?>portafolio/subir_documento/<?php echo $portafolio->PRO_ID ?>">Nuevo Documento</a>
+<a href="<?php echo base_url()?>documento/subir_documento/<?php echo $portafolio->PRO_ID ?>">Nuevo Documento</a>
 
 <h4>Documentos:</h4>
 
 <table border="1">
-	<tr>
-		<th>ID</th>
+	<tr align="center">
+		<th>#</th>
 		<th>NOMBRE</th>
-		<th>USUARIO</th>
+		<th>DUEÑO</th>
+		<th>DESCRIPCION</th>
+		<th>ACCIONES</th>
 	</tr>
 	<?php
+	$enumerador =1;
 		foreach ($documentos as $doc) {
+		
 	?>
 		<tr>
-			<td><a href="<?php echo base_url()?>documentos/<?php echo $doc->DOC_ID ?>"><?php echo $doc->DOC_ID ?></a></td>
+			<td align="center"><?php echo $enumerador ?></td>
 			<td><?php echo $doc->DOC_NOMBRE ?></td>
 			<td><?php echo $doc->ID_USUARIO ?></td>
+			<td><?php echo $doc->DOC_DESCRIPCION ?></td>
+			<td colspan = 3 >
+				<a href="<?php echo base_url()?>documento/historia_documento/<?php echo $doc->DOC_ID ?>">VER</a>
+			</td>
 		</tr>
 	<?php
+		$enumerador++;
 		}
 	?>
 </table>

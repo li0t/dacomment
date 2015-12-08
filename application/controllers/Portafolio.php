@@ -34,7 +34,7 @@ class Portafolio extends CI_Controller {
       show_404();
     }
       $permisos = $this->portafolio_model->obtenerPermisosPortafolio($id);
-      $documentos = $this->portafolio_model->obtenerDocumentosPortafolio($id);
+      $documentos = $this->documento_model->obtenerDocumentosPortafolio($id);
       $this->layout->view('obtener_portafolio',compact('portafolio','permisos','documentos'));
   }
 
@@ -192,54 +192,4 @@ class Portafolio extends CI_Controller {
 				}
 
 	}
-
-  public function subir_documento($id=null)
-	{
-		if (!$id) {
-	  		show_404();
-	  	}
-
-    $this->session->set_userdata("portafolio", $id);
-    $this->layout->view('subir_documento', compact('id'));
-
-	}
-
-  public function do_upload()
-	{
-    $id = $this->session->userdata('portafolio');
-    $this->session->set_userdata("portafolio", null);
-
-    $usuario = $this->session->userdata('usuario');
-    $nombreDocumento = $this->input->post("nombreDocumento",true);
-
-    if (!$id || !$nombreDocumento || !$usuario) {
-        show_404();
-    }
-
-    $carpetaPortafolio = './uploads/'.$id;
-    $carpetaDocumento = $carpetaPortafolio.'/'.$nombreDocumento;
-
-    if(!is_dir($carpetaPortafolio)) mkdir($carpetaPortafolio,0777);
-    if(!is_dir($carpetaDocumento)) mkdir($carpetaDocumento,0777);
-
-    $config['allowed_types'] = 'gif|jpg|png|doc|docx|pdf|txt';
-    $config['upload_path'] = $carpetaDocumento;
-    $config['max_size']	= '10000';
-
-    $this->load->library('upload', $config);
-
-    if ($this->upload->do_upload()) {
-
-       $data = array("PRO_ID"=>$id,"DOC_NOMBRE"=>$nombreDocumento, "DOC_FECHA"=>date("D M d, Y G:i"), "DOC_ESTADO"=>1, "ID_USUARIO"=>$usuario->USU_ID);
-       $this->documento_model->insertarDocumento($data);
-       $this->session->set_flashdata("ControllerMessage","Se ha subido un nuevo documento!");
-       redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
-
-    } else {
-      $this->session->set_flashdata("ControllerMessage","Ha habido un error subiendo el nuevo documento! ".$this->upload->display_errors());
-      redirect(base_url()."portafolio/obtener_portafolio/".$id,301);
-    }
-
-	}
-
 }
