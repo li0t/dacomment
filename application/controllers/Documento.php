@@ -109,4 +109,43 @@ class Documento extends CI_Controller {
 
   }
 
+  public function descargar_version($id_doc=null, $id_ver=null)
+  {
+
+    if (!$id_doc || !$id_ver)  show_404();
+
+    $doc = $this->documento_model->obtenerDocumento(array("DOC_ID"=>$id_doc));
+    $ver = $this->documento_model->obtenerVersion(array("VER_ID"=>$id_ver));
+    $id_port = $doc->PRO_ID;
+
+    if (!$id_doc || !$id_ver)  {
+      $this->session->set_flashdata("ControllerMessage","Ha habido un error de parametros!");
+      $this->layout->view('ver_documento', compact('id_doc','id_port','versiones'));
+    }
+
+    $versiones = $this->version_model->obtenerVersiones($id_doc);
+
+    $fecha = str_replace(' ', '_', $ver->VER_FECHA);
+    $path ="./uploads/$doc->PRO_ID/$doc->DOC_NOMBRE/$fecha";
+    $files = glob($path."*");
+
+    if (count($files) < 1) {
+      $this->session->set_flashdata("ControllerMessage","Ha habido un error descargando el documento!");
+      $this->layout->view('ver_documento', compact('id_doc','id_port','versiones', '0'));
+
+    } else {
+
+      $ext = pathinfo($files[0])['extension'];
+
+      $this->load->helper('download');
+      $data = file_get_contents($path.".".$ext);
+      $name = $doc->DOC_NOMBRE."V".$ver->VER_NUMERO.".".$ext;
+
+      force_download($name, $data);
+
+      $this->layout->view('ver_documento', compact('id_doc','id_port','versiones'));
+    }
+  }
+
+
 }

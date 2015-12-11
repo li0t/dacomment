@@ -10,6 +10,7 @@
     <?php echo $this->layout->getTitle(); ?>
   </title>
   <link href="<?php echo base_url()?>../public/css/template.css" rel='stylesheet' type='text/css' media='all' />
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
   <meta name="description" content="<?php echo $this->layout->getDescripcion(); ?>">
   <meta name="keywords" content="<?php echo $this->layout->getKeywords(); ?>" />
   <!--*************auxiliares*****************-->
