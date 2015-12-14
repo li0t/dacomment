@@ -31,3 +31,37 @@ foreach ($versiones as $ver)
 }
 ?>
 </table>
+
+
+<BR><BR>
+<h1>Permiso Documentos</h1>
+<a href="<?php echo base_url()?>documento/darpermiso_documento/<?php echo $id_port ?>/<?php echo $id_doc ?>">Permiso a Documento</a>
+<table border="1">
+	<tr>
+		<th> # </th>
+		<th>USUARIO</th>
+		<th>DOCUMENTO</th>
+		<th>PERMISO</th>
+		<th>ACCION</th>
+	</tr>
+<?php
+$enumerador =1;
+foreach ($permisos as $per)
+{
+?>
+	<tr>
+		<td align="center"><?php echo $enumerador ?></td>
+		<td><?php echo $per->USU_NOMBRES.' '.$per->USU_APELLIDO_PATERNO ?></td>
+		<td><?php echo $per->DOC_NOMBRE ?></td>
+		<td><?php echo $per->PER_DESCRIPCION ?></td>
+		<td>
+			<a href="<?php echo base_url()?>documento/quitarpermiso_documento/<?php echo $per->DOC_ID ?>/<?php echo $per->USU_ID ?>/<?php echo $per->PER_ID ?>/<?php echo $id_port ?>">Eliminar</a>
+		</td>
+	</tr>
+<?php
+	$enumerador++;
+}
+?>
+</table>
+
+

@@ -121,10 +121,13 @@ class Portafolio extends CI_Controller {
       show_404();
     }
     $usuario = $this->session->userdata('usuario');
-    if (!$usuario) {
+    if (!$usuario) 
+    {
       $this->session->set_flashdata("ControllerMessage","Inicia agregar permisos a un portafolio!");
       redirect(base_url()."portafolio",301);
     }
+
+    $usuarios = $this->permiso_model->obtenerPermisos();
     $permisos = $this->permiso_model->obtenerPermisos();
     $this->layout->view('entregar_nuevo_permiso',compact('id','permisos'));
     // Pregunta si esta insertando datos por post desde un formulario

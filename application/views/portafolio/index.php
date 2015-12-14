@@ -24,11 +24,12 @@
 		foreach ($portafolios as $por) {
 	?>
 		<tr>
-			<td align="center"><a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $por->PRO_ID ?>"><?php echo $enumerar ?></a></td>
+			<td align="center"><?php echo $enumerar ?></td>
 			<td><?php echo $por->PRO_NOMBRE ?></td>
 			<td><?php echo $por->USU_ID ?></td>
 			<td><?php echo $por->PRO_FECHA ?></td>
 			<td>
+				<a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $por->PRO_ID ?>">Ver</a>
 				<a href="<?php echo base_url()?>portafolio/editar_portafolio/<?php echo $por->PRO_ID ?>">Editar</a>
 				<a href="<?php echo base_url()?>portafolio/eliminar_portafolio/<?php echo $por->PRO_ID ?>">Eliminar</a>
 			</td>
