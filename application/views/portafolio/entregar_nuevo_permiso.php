@@ -15,12 +15,12 @@ $atributos = array('id'=>'nuevopermiso','name'=>'nuevopermiso');
 echo form_open_multipart(null,$atributos);
 ?>
 <p>Nombre</p>
-<!--<input type="text" id="usuarioid" name="usuarioid" placeholder="Ingresa el ID del usuario a agregar!"/>-->  
+<input type="text" id="usuarioid" name="usuarioid" placeholder="Ingresa el ID del usuario a agregar!" required/>  
 <!-- Esto debería recibir un nombre -->
 <br>
 <select id="permisoid" name="permisoid">
 	<?php
-		foreach ($permisos as $per) 
+		foreach ($permisos as $per)
 		{
 	?>
 			<option value="<?php echo $per->PER_ID ?>"><?php echo $per->PER_DESCRIPCION ?></option>
