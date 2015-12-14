@@ -16,26 +16,45 @@ class Portafolio extends CI_Controller {
 	public function index()
 	{
     $usuario = $this->session->userdata('usuario');
+
     if (!$usuario) {
       $this->session->set_flashdata("ControllerMessage","Inicia sesión para ver tus portafolios!");
       redirect(base_url(),301);
 	  }
+
 	  $portafolios = $this->portafolio_model->obtenerMisPortafolios(array("PRO_ESTADO"=>true,"USU_ID"=>$usuario->USU_ID));
-	  $this->layout->view('index',compact("portafolios"));
+    $compartidos = $this->portafolio_model->obtenerPortafoliosCompartidos($usuario->USU_ID);
+
+	  $this->layout->view('index',compact('portafolios', 'compartidos'));
 	}
 
   public function obtener_portafolio($id=null)
   {
+    $usuario = $this->session->userdata('usuario');
+
+    if (!$usuario) {
+      $this->session->set_flashdata("ControllerMessage","Inicia sesión!");
+      redirect(base_url(),301);
+    }
+
     if (!$id) {
       show_404();
     }
+
     $portafolio = $this->portafolio_model->obtenerPortafolioPorId($id);
+
     if(!$portafolio){
-      show_404();
+      $this->session->set_flashdata("ControllerMessage","El portafolio no ha sido encontrado!");
+      redirect(base_url()."portafolio",301);
     }
-      $permisos = $this->portafolio_model->obtenerPermisosPortafolio($id);
-      $documentos = $this->documento_model->obtenerDocumentosPortafolio($id);
-      $this->layout->view('obtener_portafolio',compact('portafolio','permisos','documentos'));
+
+    $esCreador = ($portafolio->USU_ID === $usuario->USU_ID);
+
+    $tienePermisos = (!$esCreador) ? $this->portafolio_model->tienePermisosPortafolio(array("USU_ID"=>$usuario->USU_ID, "PRO_ID"=>$id)) : false;
+
+    $permisos = $this->portafolio_model->obtenerPermisosPortafolio($id);
+    $documentos = $this->documento_model->obtenerDocumentosPortafolio($id);
+    $this->layout->view('obtener_portafolio',compact('portafolio','permisos','documentos','esCreador','tienePermisos'));
   }
 
 	public function crear_portafolio()
@@ -121,7 +140,7 @@ class Portafolio extends CI_Controller {
       show_404();
     }
     $usuario = $this->session->userdata('usuario');
-    if (!$usuario) 
+    if (!$usuario)
     {
       $this->session->set_flashdata("ControllerMessage","Inicia agregar permisos a un portafolio!");
       redirect(base_url()."portafolio",301);
