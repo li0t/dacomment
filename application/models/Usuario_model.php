@@ -32,7 +32,7 @@ class Usuario_model extends CI_Model {
     {
       $where=$datos;
       $query=$this->db
-      ->select("USU_ID")
+      ->select("USU_ID, USU_NOMBRES")
       ->from("USUARIO")
       ->where($where)
       ->get();

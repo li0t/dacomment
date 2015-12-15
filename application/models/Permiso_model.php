@@ -65,7 +65,7 @@ class Permiso_model extends CI_Model {
       return $query->row();
     }
 
-    public function obtenerPeEliminarrmisosPortafolio($id)
+    public function obtenerPermisosPortafolio($id)
     {
       $where=array("PERMISOS_PROYECTO.PRO_ID"=>$id,"PORTAFOLIO.PRO_ESTADO"=>TRUE);
       $query=$this->db

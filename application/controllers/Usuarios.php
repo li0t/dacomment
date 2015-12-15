@@ -44,7 +44,7 @@ class Usuarios extends CI_Controller {
           $this->session->set_userdata("usuario", $autenticado);
 
           // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
-          $this->session->set_flashdata("ControllerMessage","Te has logeado con éxito!");
+          $this->session->set_flashdata("ControllerMessage","Bienvenido ".$autenticado->USU_NOMBRES);
           redirect(base_url(),301);
         } else {
           // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona

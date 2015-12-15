@@ -102,7 +102,7 @@ class Documento extends CI_Controller {
 
     if (!$doc) show_404();
 
-    $this->layout->view('versionar_documento', compact('id_port','doc'));
+    $this->layout->view('versionar_documento', compact('id_port','id_doc','doc'));
 
   }
 

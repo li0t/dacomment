@@ -58,7 +58,7 @@
 ?>
   <br><br>
   <h1>Permiso Documentos</h1>
-  <a href="<?php echo base_url()?>documento/darpermiso_documento/<?php echo $id_port ?>/<?php echo $id_doc ?>">Permiso a Documento</a>
+  <a href="<?php echo base_url()?>documento/darpermiso_documento/<?php echo $id_port ?>/<?php echo $id_doc ?>">Nuevo Permiso</a>
   <table>
   	<tr>
   		<th> # </th>
