@@ -37,6 +37,14 @@ class Permiso_model extends CI_Model {
       return $query->result();
     }
 
+    public function editarPermisosDocumento($datos=array())
+    {
+      $this->db->where('DOC_ID', $datos["DOC_ID"]);
+      $this->db->where('USU_ID', $datos["USU_ID"]); // Multiples invocaciones de where genera una clausula AND
+      $this->db->update('PERMISOS_DOCUMENTOS',$datos);
+      return true;
+    }
+
     public function eliminarPermisoDocumentos($id_doc,$id_usu,$id_per)
     {
       $this->db->where('DOC_ID', $id_doc);
@@ -57,7 +65,7 @@ class Permiso_model extends CI_Model {
       return $query->row();
     }
 
-    public function obtenerPermisosPortafolio($id)
+    public function obtenerPeEliminarrmisosPortafolio($id)
     {
       $where=array("PERMISOS_PROYECTO.PRO_ID"=>$id,"PORTAFOLIO.PRO_ESTADO"=>TRUE);
       $query=$this->db
@@ -70,7 +78,7 @@ class Permiso_model extends CI_Model {
       ->get();
       return $query->result();
     }
-    
+
     public function tienePermisosPortafolio($datos=array())
     {
       $where=$datos;

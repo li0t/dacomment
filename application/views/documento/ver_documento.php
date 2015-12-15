@@ -78,6 +78,7 @@
   		<td><?php echo $per->DOC_NOMBRE ?></td>
   		<td><?php echo $per->PER_DESCRIPCION ?></td>
   		<td>
+				<a href="<?php echo base_url()?>documento/editar_permiso_usuario/<?php echo $per->DOC_ID ?>/<?php echo $id_port ?>/<?php echo $per->USU_ID ?>">Editar</a>
   			<a href="<?php echo base_url()?>documento/quitarpermiso_documento/<?php echo $per->DOC_ID ?>/<?php echo $per->USU_ID ?>/<?php echo $per->PER_ID ?>/<?php echo $id_port ?>">Eliminar</a>
   		</td>
   	</tr>

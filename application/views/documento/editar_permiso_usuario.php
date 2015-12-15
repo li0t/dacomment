@@ -1,6 +1,5 @@
 
-	<h1>Editar Permisos  Portafolio</h1>
-	<a href="<?php echo base_url()?>portafolio">Volver</a>
+	<h1>Editar Permisos  Documento</h1>
 
 <?php
 	if ($this->session->flashdata('ControllerMessage')!='') {
@@ -9,6 +8,9 @@
 <?php
 	}
 ?>
+
+<a href="<?php echo base_url()?>documento/historia_documento/<?php echo $id_doc ?>/<?php echo $id_port ?>">volver</a>
+<br>
 
 <?php
 $atributos = array('id'=>'editarpermiso','name'=>'editarpermiso');
@@ -25,7 +27,7 @@ echo form_open_multipart(null,$atributos);
 		}
 	?>
 </select>
-<input type="hidden" id="id" name="id" value="<?php echo $id ?>">
+<input type="hidden" id="id" name="id" value="<?php echo $id_doc ?>">
 <br>
 <input type="submit" value="Editar Permiso"/>
 <?php

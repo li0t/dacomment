@@ -143,8 +143,8 @@ class Documento extends CI_Controller {
     $usuario = $this->session->userdata('usuario');
     if (!$usuario)
     {
-      $this->session->set_flashdata("ControllerMessage","Inicia para dar permisos a un documento!");
-      redirect(base_url()."documento",301);
+      $this->session->set_flashdata("ControllerMessage","Inicia sesión antes!");
+      redirect(base_url(),301);
     }
     if (!$id_doc || !$id_port)
     {
@@ -182,8 +182,43 @@ class Documento extends CI_Controller {
     }
   }
 
+  public function editar_permiso_usuario($id_doc=null, $id_port=null, $usuario=null)
+  {
+    if (!$id_doc || !$id_port || !$usuario) {
+      show_404();
+    }
+    if (!$this->session->userdata('usuario')) {
+      $this->session->set_flashdata("ControllerMessage","Inicia sesión antes!");
+      redirect(base_url(),301);
+    }
+    $permisos = $this->permiso_model->obtenerPermisos();
+    $this->layout->view('editar_permiso_usuario',compact('id_doc','id_port','usuario','permisos'));
+    // Pregunta si esta insertando datos por post desde un formulario
+    if ($this->input->post()) {
+      // Genera el array con los datos a insertar en la base
+      $data = array("DOC_ID"=>$id_doc, "USU_ID"=>$usuario,"PER_ID"=>$this->input->post("permisoid",true));
+      // Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
+      $actualizar = $this->permiso_model->editarPermisosDocumento($data);
+        if ($actualizar) {
+          // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
+          $this->session->set_flashdata("ControllerMessage","Se han modificado los permisos del documento!");
+          redirect(base_url()."documento/historia_documento/$id_doc/$id_port",301);
+        } else {
+          // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
+          $this->session->set_flashdata("ControllerMessage","Error modificando los permisos del documento!");
+          redirect(base_url()."documento/historia_documento/$id_doc/$id_port",301);
+        }
+    }
+  }
+
   public function quitarpermiso_documento($id_doc=null,$id_usu=null,$id_per=null,$id_port)
   {
+
+    if (!$this->session->userdata('usuario')) {
+      $this->session->set_flashdata("ControllerMessage","Inicia sesión antes!");
+      redirect(base_url(),301);
+    }
+
     if (!$id_doc || !$id_usu || !$id_per || !$id_port)  show_404();
 
 

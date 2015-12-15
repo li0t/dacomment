@@ -8,7 +8,7 @@
 	}
 ?>
 
-<a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $id_port ?>">Volver</a>
+<a href="<?php echo base_url()?>documento/historia_documento/<?php echo $id_doc ?>/<?php echo $id_port ?>">volver</a>
 
 <?php echo form_open_multipart('documento/do_upload');?>
 
