@@ -26,7 +26,6 @@
   <div id="navbar">
     <ul>
       <li><a href="<?php echo base_url()?>">DACOMMENT</a></li>
-      <li><a href="<?php echo base_url()?>usuarios">USUARIOS</a></li> <!--Esto debe eliminarse en la versión final-->
       <?php
       	if ($this->session->userdata('usuario')) {
       ?>
