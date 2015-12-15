@@ -13,7 +13,7 @@
 <a href="<?php echo base_url()?>documento/versionar_documento/<?php echo $id_port ?>/<?php echo $id_doc ?>">Nueva Version</a>
 <br>
 
-<table border="1">
+<table>
 	<tr>
 		<th> # </th>
 		<th>USUARIO</th>

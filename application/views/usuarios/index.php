@@ -8,7 +8,7 @@
 	}
 ?>
 
-<table border="1">
+<table>
 	<tr>
 		<th>ID</th>
     <th>RUT</th>

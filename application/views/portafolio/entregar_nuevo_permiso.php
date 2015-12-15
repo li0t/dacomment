@@ -15,7 +15,17 @@ $atributos = array('id'=>'nuevopermiso','name'=>'nuevopermiso');
 echo form_open_multipart(null,$atributos);
 ?>
 <p>Nombre</p>
-<input type="text" id="usuarioid" name="usuarioid" placeholder="Ingresa el ID del usuario a agregar!" required/>  
+<select id="usuarioid" name="usuarioid" required>
+	<option value="" disabled selected>Seleccione usuario</option>
+<?php
+	foreach ($listusu as $usu)
+	{
+?>
+		<option value="<?php echo $usu->USU_ID ?>"><?php echo $usu->USU_NOMBRES.' '.$usu->USU_APELLIDO_PATERNO ?></option>
+<?php
+	}
+?>
+</select>
 <!-- Esto debería recibir un nombre -->
 <br>
 <select id="permisoid" name="permisoid">

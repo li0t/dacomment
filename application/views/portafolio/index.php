@@ -13,7 +13,7 @@
 
 <h3>MIS PORTAFOLIOS</h3>
 
-<table border="1">
+<table>
 	<tr>
 		<th>#</th>
 		<th>NOMBRE</th>
@@ -46,7 +46,7 @@
 
 <h3>COMPARTIDOS CONMIGO</h3>
 
-<table border="1">
+<table>
 	<tr>
 		<th>#</th>
 		<th>NOMBRE</th>

@@ -28,7 +28,7 @@
 
   <h4>Documentos:</h4>
 
-  <table border="1">
+  <table>
   	<tr align="center">
   		<th>#</th>
   		<th>NOMBRE</th>
@@ -64,7 +64,7 @@
 ?>
   <h4><a href="<?php echo base_url()?>portafolio/entregar_nuevo_permiso/<?php echo $portafolio->PRO_ID ?>">Entregar Permisos</a> </h4>
 
-  <table border="1">
+  <table>
   	<tr>
   		<th>USUARIO</th>
   		<th>PERMISO</th>

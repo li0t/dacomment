@@ -9,6 +9,7 @@ class Portafolio extends CI_Controller {
 	  $this->layout->setLayout('template'); // carga el template para todos las vistas
 	  $this->load->model('portafolio_model'); // Indica que todos los metodos pueden llamar a este modelo
     $this->load->model('permiso_model'); // Indica que todos los metodos pueden llamar a este modelo
+    $this->load->model('usuario_model'); // Indica que todos los metodos pueden llamar a este modelo
     $this->load->model('documento_model'); // Indica que todos los metodos pueden llamar a este modelo
     $this->layout->setTitle('Dacomment:Portafolio'); // edita el título por defecto
 	}
@@ -146,9 +147,10 @@ class Portafolio extends CI_Controller {
       redirect(base_url()."portafolio",301);
     }
 
+    $listusu  = $this->usuario_model->getTodosUsuarios();
     $usuarios = $this->permiso_model->obtenerPermisos();
     $permisos = $this->permiso_model->obtenerPermisos();
-    $this->layout->view('entregar_nuevo_permiso',compact('id','permisos'));
+    $this->layout->view('entregar_nuevo_permiso',compact('id','permisos','listusu'));
     // Pregunta si esta insertando datos por post desde un formulario
     if ($this->input->post()) {
       // Genera el array con los datos a insertar en la base
