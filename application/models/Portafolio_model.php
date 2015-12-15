@@ -84,10 +84,13 @@ class Portafolio_model extends CI_Model {
 
     public function obtenerPermisosPortafolio($id)
     {
-      $where=array("PRO_ID"=>$id);
+      $where=array("PERMISOS_PROYECTO.PRO_ID"=>$id,"PORTAFOLIO.PRO_ESTADO"=>TRUE);
       $query=$this->db
-      ->select("PRO_ID,USU_ID,PER_ID")
+      ->select("PERMISOS_PROYECTO.PRO_ID,PERMISOS_PROYECTO.USU_ID,PERMISOS_PROYECTO.PER_ID,USU_NOMBRES,USU_APELLIDO_PATERNO,PRO_NOMBRE,PER_DESCRIPCION")
       ->from("PERMISOS_PROYECTO")
+      ->join("USUARIO","PERMISOS_PROYECTO.USU_ID=USUARIO.USU_ID")
+      ->join("PORTAFOLIO","PERMISOS_PROYECTO.PRO_ID=PORTAFOLIO.PRO_ID")
+      ->join("PERMISOS","PERMISOS_PROYECTO.PER_ID=PERMISOS.PER_ID")
       ->where($where)
       ->get();
       return $query->result();

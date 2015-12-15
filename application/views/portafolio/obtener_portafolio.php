@@ -74,8 +74,8 @@
   		foreach ($permisos as $per) {
   	?>
   		<tr>
-  			<td><?php echo $per->USU_ID ?></td>
-  			<td><?php echo $per->PER_ID ?></td>
+  			<td><?php echo $per->USU_NOMBRES." ".$per->USU_APELLIDO_PATERNO ?></td>
+  			<td><?php echo $per->PER_DESCRIPCION ?></td>
   			<td>
   				<a href="<?php echo base_url()?>portafolio/editar_permiso_usuario/<?php echo $per->PRO_ID ?>/<?php echo $per->USU_ID ?>">Editar</a>
   				<a href="<?php echo base_url()?>portafolio/eliminar_permiso_usuario/<?php echo $per->PRO_ID ?>/<?php echo $per->USU_ID ?>">Eliminar</a>
