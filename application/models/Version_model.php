@@ -19,13 +19,14 @@ class Version_model extends CI_Model {
         ->select("VER_ID,DOC_ID,VER_NUMERO,VER_FECHA,VER_COMENTARIO,ID_USUARIO")
         ->from("VERSION")
         ->where($where)
+        ->order_by("VER_ID","asc")
         ->get();
         return $query->result();
     }
 
     public function obtenerUltimaVersion($id_doc)
     {
-        $where=array("DOC_ID"=>$id_doc);        
+        $where=array("DOC_ID"=>$id_doc);
         $query=$this->db
         ->select_max('VER_NUMERO')
         ->from("VERSION")

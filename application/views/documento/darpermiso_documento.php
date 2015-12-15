@@ -1,7 +1,7 @@
 <h1>Permiso a documentos</h1>
 
 
-<a href="<?php echo base_url()?>portafolio/obtener_portafolio/<?php echo $id_port ?>">Volver</a>
+<a href="<?php echo base_url()?>documento/historia_documento/<?php echo $id_doc ?>/<?php echo $id_port ?>">volver</a>
 <br><br>
 
 
@@ -30,7 +30,7 @@ Seleccione Tipo Permiso
 <select id="permiso" name="permiso" required>
 		<option value="" disabled selected>Seleccione Permiso</option>
 <?php
-	foreach ($permisos as $per) 
+	foreach ($permisos as $per)
 	{
 ?>
 		<option value="<?php echo $per->PER_ID ?>"><?php echo $per->PER_DESCRIPCION ?></option>

@@ -55,16 +55,16 @@ class Usuario_model extends CI_Model {
 
     public function getUsuarioPermisoDoc($id_usu,$id_doc,$id_port)
     {
-        $where=array("PERMISOS_PROYECTO.PRO_ID"=>$id_port,"USUARIO.USU_ID!="=>$id_usu,"DOCUMENTOS.DOC_ID"=>$id_doc,"PERMISOS_DOCUMENTOS.PER_ID"=>NULL);
-        $query=$this->db
-        ->select("USUARIO.USU_ID,USUARIO.USU_NOMBRES,USUARIO.USU_APELLIDO_PATERNO")
-        ->from("USUARIO")
-        ->join("PERMISOS_PROYECTO","USUARIO.USU_ID=PERMISOS_PROYECTO.USU_ID","left")
-        ->join("DOCUMENTOS","PERMISOS_PROYECTO.PRO_ID=DOCUMENTOS.PRO_ID","left")
-        ->join("PERMISOS_DOCUMENTOS","PERMISOS_DOCUMENTOS.DOC_ID=DOCUMENTOS.DOC_ID AND USUARIO.USU_ID=PERMISOS_DOCUMENTOS.USU_ID","left")
-        ->where($where)
-        ->get();
-        return $query->result();
+      $where=array("PERMISOS_PROYECTO.PRO_ID"=>$id_port,"USUARIO.USU_ID!="=>$id_usu,"DOCUMENTOS.DOC_ID"=>$id_doc,"PERMISOS_DOCUMENTOS.PER_ID"=>NULL);
+      $query=$this->db
+      ->select("USUARIO.USU_ID,USUARIO.USU_NOMBRES,USUARIO.USU_APELLIDO_PATERNO")
+      ->from("USUARIO")
+      ->join("PERMISOS_PROYECTO","USUARIO.USU_ID=PERMISOS_PROYECTO.USU_ID","left")
+      ->join("DOCUMENTOS","PERMISOS_PROYECTO.PRO_ID=DOCUMENTOS.PRO_ID","left")
+      ->join("PERMISOS_DOCUMENTOS","PERMISOS_DOCUMENTOS.DOC_ID=DOCUMENTOS.DOC_ID AND USUARIO.USU_ID=PERMISOS_DOCUMENTOS.USU_ID","left")
+      ->where($where)
+      ->get();
+      return $query->result();
     }
 
 }

@@ -51,9 +51,9 @@ class Portafolio extends CI_Controller {
 
     $esCreador = ($portafolio->USU_ID === $usuario->USU_ID);
 
-    $tienePermisos = (!$esCreador) ? $this->portafolio_model->tienePermisosPortafolio(array("USU_ID"=>$usuario->USU_ID, "PRO_ID"=>$id)) : false;
+    $tienePermisos = (!$esCreador) ? $this->permiso_model->tienePermisosPortafolio(array("USU_ID"=>$usuario->USU_ID, "PRO_ID"=>$id)) : false;
 
-    $permisos = $this->portafolio_model->obtenerPermisosPortafolio($id);
+    $permisos = $this->permiso_model->obtenerPermisosPortafolio($id);
     $documentos = $this->documento_model->obtenerDocumentosPortafolio($id);
     $this->layout->view('obtener_portafolio',compact('portafolio','permisos','documentos','esCreador','tienePermisos'));
   }
@@ -148,7 +148,6 @@ class Portafolio extends CI_Controller {
     }
 
     $listusu  = $this->usuario_model->getTodosUsuarios();
-    $usuarios = $this->permiso_model->obtenerPermisos();
     $permisos = $this->permiso_model->obtenerPermisos();
     $this->layout->view('entregar_nuevo_permiso',compact('id','permisos','listusu'));
     // Pregunta si esta insertando datos por post desde un formulario
@@ -156,7 +155,7 @@ class Portafolio extends CI_Controller {
       // Genera el array con los datos a insertar en la base
       $data = array("USU_ID"=>$this->input->post("usuarioid",true),"PER_ID"=>$this->input->post("permisoid",true),"PRO_ID"=>$id);
       // Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
-      $insertar = $this->portafolio_model->entregarPermisosPortafolio($data);
+      $insertar = $this->permiso_model->entregarPermisosPortafolio($data);
         if ($insertar) {
           // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
           $this->session->set_flashdata("ControllerMessage","Se han otorgado permisos para el portafolio!");
@@ -186,7 +185,7 @@ class Portafolio extends CI_Controller {
       // Genera el array con los datos a insertar en la base
       $data = array("PRO_ID"=>$id, "USU_ID"=>$usuario,"PER_ID"=>$this->input->post("permisoid",true));
       // Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
-      $actualizar = $this->portafolio_model->editarPermisosPortafolio($data);
+      $actualizar = $this->permiso_model->editarPermisosPortafolio($data);
         if ($actualizar) {
           // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
           $this->session->set_flashdata("ControllerMessage","Se han modificado los permisos del portafolio!");
@@ -204,7 +203,7 @@ class Portafolio extends CI_Controller {
 		if (!$id || !$usuario) {
 	  		show_404();
 	  	}
-	  	$elimina = $this->portafolio_model->eliminarPermisoUsuario($id, $usuario);
+	  	$elimina = $this->permiso_model->eliminarPermisoUsuario($id, $usuario);
 	  	if ($elimina) {
 					// Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
 					$this->session->set_flashdata("ControllerMessage","Se ha removido el permiso del portafolio!");

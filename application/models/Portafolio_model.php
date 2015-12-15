@@ -70,49 +70,9 @@ class Portafolio_model extends CI_Model {
       return $query->row();
     }
 
-
-    public function tienePermisosPortafolio($datos=array())
-    {
-      $where=$datos;
-      $query=$this->db
-      ->select("PER_ID")
-      ->from("PERMISOS_PROYECTO")
-      ->where($where)
-      ->get();
-      return $query->row();
-    }
-
-    public function obtenerPermisosPortafolio($id)
-    {
-      $where=array("PERMISOS_PROYECTO.PRO_ID"=>$id,"PORTAFOLIO.PRO_ESTADO"=>TRUE);
-      $query=$this->db
-      ->select("PERMISOS_PROYECTO.PRO_ID,PERMISOS_PROYECTO.USU_ID,PERMISOS_PROYECTO.PER_ID,USU_NOMBRES,USU_APELLIDO_PATERNO,PRO_NOMBRE,PER_DESCRIPCION")
-      ->from("PERMISOS_PROYECTO")
-      ->join("USUARIO","PERMISOS_PROYECTO.USU_ID=USUARIO.USU_ID")
-      ->join("PORTAFOLIO","PERMISOS_PROYECTO.PRO_ID=PORTAFOLIO.PRO_ID")
-      ->join("PERMISOS","PERMISOS_PROYECTO.PER_ID=PERMISOS.PER_ID")
-      ->where($where)
-      ->get();
-      return $query->result();
-    }
-
     public function insertarPortafolio($datos=array())
     {
       $query=$this->db->insert("PORTAFOLIO",$datos);
-      return true;
-    }
-
-    public function entregarPermisosPortafolio($datos=array())
-    {
-      $query=$this->db->insert("PERMISOS_PROYECTO",$datos); /* Falta validación */
-      return true;
-    }
-
-    public function editarPermisosPortafolio($datos=array())
-    {
-      $this->db->where('PRO_ID', $datos["PRO_ID"]);
-      $this->db->where('USU_ID', $datos["USU_ID"]); // Multiples invocaciones de where genera una clausula AND
-      $this->db->update('PERMISOS_PROYECTO',$datos);
       return true;
     }
 
@@ -123,12 +83,13 @@ class Portafolio_model extends CI_Model {
       return true;
     }
 
-    public function eliminarPermisoUsuario($id, $usuario)
+    public function esCreadorPortafolio($datos=array())
     {
-      $this->db->where('PRO_ID', $id);
-      $this->db->where('USU_ID', $usuario);
-      $this->db->delete('PERMISOS_PROYECTO');
-      return true;
+      $where=$datos;
+      $query=$this->db
+      ->from("PORTAFOLIO")
+      ->where($where);
+      return $query->count_all_results();
     }
 
 }

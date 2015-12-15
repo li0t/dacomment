@@ -9,6 +9,7 @@ class Documento extends CI_Controller {
 	  $this->layout->setLayout('template'); // carga el template para todos las vistas
     $this->load->model('version_model'); // Indica que todos los metodos pueden llamar a este modelo
     $this->load->model('documento_model'); // Indica que todos los metodos pueden llamar a este modelo
+    $this->load->model('portafolio_model'); // Indica que todos los metodos pueden llamar a este modelo
     $this->load->model('usuario_model'); // Indica que todos los metodos pueden llamar a este modelo
     $this->load->model('permiso_model'); // Indica que todos los metodos pueden llamar a este modelo
     $this->layout->setTitle('Dacomment:Portafolio'); // edita el título por defecto
@@ -21,7 +22,7 @@ class Documento extends CI_Controller {
       $this->session->set_flashdata("ControllerMessage","Inicia sesión para ver tus Documentos!");
       redirect(base_url(),301);
 	  }
-	  $this->layout->view('index',compact("portafolios"));
+	  $this->layout->view('index');
 	}
 
   public function subir_documento($id_port=null)
@@ -107,12 +108,34 @@ class Documento extends CI_Controller {
 
   public function historia_documento($id_doc=null,$id_port=null)
   {
+    $usuario = $this->session->userdata('usuario');
+
+    if (!$usuario) {
+      $this->session->set_flashdata("ControllerMessage","Inicia sesión antes de ver tus documentos!");
+      redirect(base_url(),301);
+    }
+
     if (!$id_doc || !$id_port)  show_404();
 
-
-    $permisos = $this->documento_model->obtenerPermisoDocumentos($id_doc);
     $versiones = $this->version_model->obtenerVersiones($id_doc);
-    $this->layout->view('ver_documento', compact('id_doc','id_port','versiones','permisos'));
+
+    if(count($versiones) < 1){
+      $this->session->set_flashdata("ControllerMessage","El documento no ha sido encontrado!");
+      return redirect(base_url()."portafolio/obtener_portafolio/".$id_port,301);
+    }
+
+    $esCreadorDocumento = ($versiones[0]->ID_USUARIO === $usuario->USU_ID);
+    $esCreadorPortafolio = (!$esCreadorDocumento) && $this->portafolio_model->esCreadorPortafolio(array("USU_ID"=>$usuario->USU_ID, "PRO_ID"=>$id_port));
+    $tienePermisos = (!$esCreadorDocumento) ? $this->permiso_model->tienePermisosDocumento(array("USU_ID"=>$usuario->USU_ID, "DOC_ID"=>$id_doc)) : false;
+
+    if (!$esCreadorPortafolio && !$esCreadorDocumento && !$tienePermisos) {
+      $this->session->set_flashdata("ControllerMessage","No tienes permiso para ver este documento!");
+      return redirect(base_url()."portafolio/obtener_portafolio/".$id_port,301);
+    }
+
+    $permisos = $this->permiso_model->obtenerPermisoDocumentos($id_doc);
+    $this->layout->view('ver_documento', compact('id_doc','id_port','versiones','permisos', 'esCreadorPortafolio', 'esCreadorDocumento', 'tienePermisos'));
+
   }
 
   public function darpermiso_documento($id_port=null,$id_doc=null)
@@ -144,7 +167,7 @@ class Documento extends CI_Controller {
 
       $data = array("USU_ID"=>$id_usu,"DOC_ID"=>$id_doc,"PER_ID"=>$id_per);
       // Llama al metodo que esta en el modelo y le pasa el array, lo que retorna lo guarda en variable
-      $insertar = $this->documento_model->entregarPermisoDocumento($data);
+      $insertar = $this->permiso_model->entregarPermisoDocumento($data);
         if ($insertar) {
           // Mensaje que se muestra 1 sola vez si es que esta correcto el insert y redirecciona
           $this->session->set_flashdata("ControllerMessage","Se han otorgado permisos para el portafolio!");
@@ -164,7 +187,7 @@ class Documento extends CI_Controller {
     if (!$id_doc || !$id_usu || !$id_per || !$id_port)  show_404();
 
 
-    $permisos = $this->documento_model->eliminarPermisoDocumentos($id_doc,$id_usu,$id_per);
+    $permisos = $this->permiso_model->eliminarPermisoDocumentos($id_doc,$id_usu,$id_per);
     redirect(base_url()."documento/historia_documento/".$id_doc."/".$id_port,301);
   }
 
