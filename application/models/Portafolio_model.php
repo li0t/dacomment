@@ -51,6 +51,7 @@ class Portafolio_model extends CI_Model {
       $query = $this->db
       ->select("PRO_ID,USU_ID,PRO_NOMBRE,PRO_FECHA")
       ->from("PORTAFOLIO")
+      ->where('PRO_ESTADO', true)
       ->where_in('PRO_ID', $or)
       ->order_by("PRO_ID","asc")
       ->get();

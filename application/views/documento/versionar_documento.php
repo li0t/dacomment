@@ -11,7 +11,7 @@
 <a href="<?php echo base_url()?>documento/historia_documento/<?php echo $id_doc ?>/<?php echo $id_port ?>">volver</a>
 
 <?php echo form_open_multipart('documento/do_upload');?>
-
+<h4>Los archivos debe ser de formato: .gif, .jpg, .png, .doc, .docx, .pdf, .txt</4><br><br>
 <input type="file" name="userfile" size="20" required/><br />
 <input name="nombreDocumento" value="<?php echo $doc->DOC_NOMBRE ?>" readonly/><br />
 <input size="50" name="descripcionDocumento" placeholder="Comenta los cambios en la versión" required/><br />

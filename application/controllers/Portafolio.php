@@ -147,7 +147,7 @@ class Portafolio extends CI_Controller {
       redirect(base_url()."portafolio",301);
     }
 
-    $listusu  = $this->usuario_model->getTodosUsuarios();
+    $listusu  = $this->usuario_model->getTodosUsuariosMenos($usuario->USU_ID);
     $permisos = $this->permiso_model->obtenerPermisos();
     $this->layout->view('entregar_nuevo_permiso',compact('id','permisos','listusu'));
     // Pregunta si esta insertando datos por post desde un formulario

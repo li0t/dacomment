@@ -6,8 +6,6 @@ class Documento_model extends CI_Model {
         parent::__construct();
     }
 
-
-
     public function insertarDocumento($datos=array())
     {
         $query=$this->db->insert("DOCUMENTOS",$datos);
